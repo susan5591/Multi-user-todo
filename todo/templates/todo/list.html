@@ -1,76 +1,107 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block body%}
 
-<style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	body{
-		background-color: #638CB8;
-	}
+	<style>
 
-	input{
-		width: 100%;
-		padding: 12px 20px;
-		margin: 8px 0;
-		box-sizing: border-box;
-	}
+		body{
+			background-color: #9cbee2;
+		}
 
-	input::placeholder {
-	  color: #d3d3d3;
-	}
+		input{
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			box-sizing: border-box;
+		}
 
-	.submit{
-		background-color: #6BA3E8;
-	}
+		input::placeholder {
+		color: #d3d3d3;
+		}
 
-	.center-column{
-		width:1100px;
-		margin: 20px auto;
-		padding:20px;
-		background-color: #fff;
-		border-radius: 3px;
-		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
-	}
+		.submit{
+			background-color: #6BA3E8;
+		}
 
-	.item-row{
-		background-color: #906abd;
-		margin: 10px;
-		padding: 20px;
-		border-radius: 3px;
-		color: #fff;
-		font-size: 16px;
-		box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
-	}
+		.center-column{
+			width:1100px;
+			margin: 20px auto;
+			padding:20px;
+			background-color: #fff;
+			border-radius: 3px;
+			box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+		}
 
-	.btn-danger{
-		background-color: #ffae19;
-		border-color: #e59400;
-	}
-    .distance{
-        margin-left: 250px;
-    }
-    .change{
-        margin-left: 100px;
-    }
+		.item-row{
+			background-color: #906abd;
+			margin: 5px;
+			padding: 15px;
+			border-radius: 3px;
+			color: #fff;
+			font-size: 16px;
+			box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+		}
 
-</style>
+		.btn-danger{
+			background-color: #ffae19;
+			border-color: #e59400;
+		}
+		.item-nav{
+			margin: 10px;
+			padding: 20px;
+			border-radius: 3px;
+			color: #fff;
+			font-size: 16px;
+			box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+			background-color: #6BA3E8;
+			font-weight: 800;
+		}
+	
+	</style>
 
-<div class="center-column">
-
-	<form method="POST" action="/">
-		{% csrf_token %}
-		{{form.title}}
-		<input class="btn btn-info" type="submit" name="Create Task">
-	</form>
-
-	<div class="todo-list">
-
-	{% for task in tasks %}
-		<div class="item-row">
-            <span>{{task.title}}</span>
-            <span class="distance">{{task.status}}</span>
-            <span class="distance">{{task.priority}}</span>
-            <a class="btn btn-sm btn-info change" href="#">Update</a>
-			<a class="btn btn-sm btn-danger " href="#">Delete</a>
+	<div class="center-column">
+		<div class="item-nav">  
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5">         
+						<span>Title</span>  
+					</div>  
+					<div class="col-sm-2">         
+						<span >Status</span>
+					</div>
+					<div class="col-sm-2">
+						<span >Priority</span>
+					</div>
+					<div class="col-sm-2">
+						<span>CRUD</span>
+					</div>
+				</div>
+			</div>
 		</div>
-	{% endfor %}
+		<div class="todo-nav">
+		{% for task in tasks %}
+			<div class="item-row">  
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5">         
+							<span>{{task.title}}</span>  
+						</div>  
+						<div class="col-sm-2">         
+							<span class="distance">{{task.status}}</span>
+						</div>
+						<div class="col-sm-2">
+							<span class="distance">{{task.priority}}</span>
+						</div>
+						<div class="col-sm-2">
+							<a class="btn btn-sm btn-info change" href="#">Update</a>
+							<a class="btn btn-sm btn-danger " href="#">Delete</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
 	</div>
-</div>
+{% endblock %}

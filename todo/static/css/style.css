@@ -1,0 +1,25 @@
+.heading{
+    color: white;
+    font-size: 22px;    
+    font-weight: 700 ;
+    
+}
+.nav-link{
+    color: black;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.hello_msg{
+    color: white;
+    font-size: 19px;
+    font-weight: 600;
+}
+.user{
+    margin-left: 20px;
+}
+a.hello_msg.hover{
+    color: red;
+    text-decoration: none;
+    background-color: white;
+}
