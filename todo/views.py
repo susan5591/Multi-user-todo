@@ -13,11 +13,14 @@ def registerpage(request):
     form = CreateUserForm()
     if request.method =="POST":
         form = CreateUserForm(request.POST)
-        if form.is_valid:
-            user=form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request,"Account was created for "+username)
-            return redirect('../login/')
+        if form.is_valid():
+            user = form.save()
+            TODO.objects.create(
+                user=user,            
+            )
+            if user is not None:
+                return redirect('loginpage')
+            
     context={
         'form':form
     }
@@ -32,7 +35,7 @@ def loginpage(request):
         user = authenticate(request,username = username, password=password)
         if user is not None:
             login(request,user)
-            return redirect("../home/")
+            return redirect("home")
         else:
             messages.info(request,'Username or password is incorrect')
     context = {}
@@ -41,27 +44,34 @@ def loginpage(request):
 
 def logoutuser(request):
     logout(request)
-    return redirect('../login')
+    return redirect('loginpage')
 
 
 def home(request):
-    tasks = TODO.objects.all()
-    myFilter = WorkFilter(request.GET, queryset = tasks)
-    tasks = myFilter.qs
-    context = {
-        'tasks':tasks,
-        'myFilter':myFilter  
-    }
-    return render(request,'todo/list.html',context)
+    if request.user.is_authenticated:
+        user = request.user
+        tasks = TODO.objects.filter(user = user)
+        myFilter = WorkFilter(request.GET, queryset = tasks)
+        tasks = myFilter.qs
+        context = {
+            'tasks':tasks,
+            'myFilter':myFilter  
+        }
+        return render(request,'todo/list.html',context)
 
 
 def create(request):
     form = TODOForm()
     if request.method == 'POST':
+        user = request.user
         form = TODOForm(request.POST)
 
         if form.is_valid():
-            form.save()
-            return redirect('../home') 
-    context ={'form':form}
-    return render(request,'activities/create.html',context)
+            todo = form.save(commit=False)
+            todo.user = user
+            todo.save()
+            return redirect('home') 
+    context ={
+        'form':form
+        }
+    return render(request,'todo/create.html',context)

@@ -8,7 +8,7 @@ from .models import TODO
 class TODOForm(ModelForm):
     class Meta:
         model = TODO
-        fields = '__all__'
+        fields = ['title','task','status','priority']
 
 class CreateUserForm(UserCreationForm):
     class Meta:
