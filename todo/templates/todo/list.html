@@ -59,7 +59,6 @@
 			background-color: #6BA3E8;
 			font-weight: 800;
 		}
-	
 	</style>
 
 	<div class="center-column">
@@ -88,7 +87,9 @@
 					<div class="row">
 						<div class="col-lg-5">
 							{% if task.status == 'COMPLETED' %}  
-								<strike>{{task.title}}</strike>   
+								<strike style="color: red">
+									<span style='color:black'>{{task.title}}</span>
+								</strike>   
 							{%else%}    
 								<span>{{task.title}}</span>  
 							{% endif %}
