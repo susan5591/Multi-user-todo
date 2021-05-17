@@ -86,8 +86,12 @@
 			<div class="item-row">  
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-5">         
-							<span>{{task.title}}</span>  
+						<div class="col-lg-5">
+							{% if task.status == 'COMPLETED' %}  
+								<strike>{{task.title}}</strike>   
+							{%else%}    
+								<span>{{task.title}}</span>  
+							{% endif %}
 						</div>  
 						<div class="col-sm-2">         
 							<span class="distance">{{task.status}}</span>

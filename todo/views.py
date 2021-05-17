@@ -15,9 +15,6 @@ def registerpage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            TODO.objects.create(
-                user=user,            
-            )
             if user is not None:
                 return redirect('loginpage')
             
@@ -50,7 +47,7 @@ def logoutuser(request):
 def home(request):
     if request.user.is_authenticated:
         user = request.user
-        tasks = TODO.objects.filter(user = user)
+        tasks = TODO.objects.filter(user = user).order_by('-status','-priority')
         myFilter = WorkFilter(request.GET, queryset = tasks)
         tasks = myFilter.qs
         context = {

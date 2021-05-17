@@ -20,7 +20,7 @@
                   <a class="nav-link active" href="{% url 'create' %}">Create</a>
                   </li>
               </ul>
-              <span class="hello_msg">Hello, {{request.user}}</span>
+              <span style='text-transform:capitalize' class="hello_msg">Hello, {{request.user}}</span>
                 <span class="user"><a class="hello_msg"  href="{% url 'logout' %}">Logout</a></span>
           </div>
       </div>
