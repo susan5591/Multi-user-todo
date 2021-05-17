@@ -1,5 +1,5 @@
 .heading{
-    color: white;
+    color: white ! important;
     font-size: 22px;    
     font-weight: 700 ;
     
@@ -19,7 +19,7 @@
     margin-left: 20px;
 }
 a.hello_msg.hover{
-    color: red;
+    color:none;
     text-decoration: none;
     background-color: white;
 }
