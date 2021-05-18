@@ -72,3 +72,37 @@ def create(request):
         'form':form
         }
     return render(request,'todo/create.html',context)
+
+
+def detailpage(request,pk):
+    title = TODO.objects.get(id=pk)
+    context = {
+        'title':title
+    }
+    return render(request,'todo/details.html',context)
+
+
+def updatepage(request,pk):
+    title = TODO.objects.get(id=pk)
+    form = TODOForm(instance = title)
+    if request.method == "POST":
+        form = TODOForm(request.POST, instance=title)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {
+        'form':form
+    }
+    return render(request,'todo/update.html',context)
+
+
+def deletepage(request,pk):
+    title = TODO.objects.get(id=pk)
+    form = TODOForm()
+    if request.method=='POST':
+        title.delete()
+        return redirect('home')
+    context={
+        'title':title
+    }
+    return render(request,'todo/delete.html',context)

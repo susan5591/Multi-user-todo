@@ -101,9 +101,9 @@
 							<span class="distance">{{task.priority}}</span>
 						</div>
 						<div class="col-md-3">
-							<a class="btn btn-sm btn-info change" href="#">Details</a>
-							<a class="btn btn-sm btn-primary " href="#">Update</a>
-							<a class="btn btn-sm btn-danger " href="#">Delete</a>
+							<a class="btn btn-sm btn-info change" href="{% url 'detailpage' task.pk %}">Details</a>
+							<a class="btn btn-sm btn-primary " href="{% url 'updatepage' task.pk %}">Update</a>
+							<a class="btn btn-sm btn-danger " href="{% url 'deletepage' task.pk %}">Delete</a>
 						</div>
 					</div>
 				</div>

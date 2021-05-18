@@ -1,10 +1,15 @@
-<h3>Update Task</h3>
+{% extends "todo/base.html" %}
+{% load static %}
+{% block body %}    
+    <div class="jumbotron">
+        <h1 align="center">This is edit page</h1>
+        <hr>
+        <form action="" method="POST" >
+        {% csrf_token %}
+        {{form.as_p}}
 
-<form method="POST" action="">
-	{% csrf_token %}
+        <input class="btn btn-primary btn-lg"  type="submit" value="Update">
 
-	{{form}}
-	<input type="submit" name="Update Task">
-	
-	
-</form>
+        </form>
+    </div>
+{%endblock%}

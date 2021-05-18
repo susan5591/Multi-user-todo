@@ -1,8 +1,13 @@
-<p>Are you sure you want to delete "{{item}}"?</p>
+{% extends "todo/base.html" %}
+{% load static %}
+{% block body %}    
+    <div class="jumbotron">
+        <p class="lead"><b>Are you sure you want to delete "{{title}}"?</b></p>
+		<form method="POST" action="">
+			{% csrf_token %}
+			<a class="btn btn-primary btn-lg" href="{% url 'home' %}" >Cancel</a>
+			<input class="btn btn-danger btn-lg" type="submit" name="Confirm">
+		</form>
+    </div>
+{%endblock%}
 
-<a href="{% url 'list' %}" >Cancel</a>
-
-<form method="POST" action="">
-	{% csrf_token %}
-	<input type="submit" name="Confirm">
-</form>

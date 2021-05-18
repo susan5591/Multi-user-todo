@@ -1,0 +1,48 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block body%}
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<style>
+
+		body{
+			background-color: #9cbee2;
+		}
+		.center-column{
+			width:1100px;
+			margin: 20px auto;
+			padding:20px;
+			background-color: #fff;
+			border-radius: 3px;
+			box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+			
+		}
+        .lead{
+            font-size: 22px;
+            font-weight: 450;
+        }
+
+
+	</style>
+
+	<div class="center-column">
+		<div class="jumbotron">
+            <h1 align="center">This is Detail page</h1>
+            
+            <hr>
+            <h1 class="display-4"><B><u>{{title.title}}</u></B></h1>
+            <br>
+            <p class="lead">{{title.task}}</p>
+            <hr class="my-4">
+            <p class="lead">Status : {{title.status}}</p> 
+            <hr class="my-4">
+            <p class="lead">Priority : {{title.priority}}</p>
+            <br>
+    
+            <a href="{% url 'home' %}"><button class="btn btn-primary btn-lg">Back</button></a>
+    
+        </div>
+	</div>
+{% endblock %}
+
