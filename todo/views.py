@@ -4,6 +4,7 @@ from .forms import *
 
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from .filters import WorkFilter
 
@@ -15,8 +16,9 @@ def registerpage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            if user is not None:
-                return redirect('loginpage')
+            username = form.cleaned_data.get('username')
+            messages.success(request,"Account was created for "+username)             
+            return redirect('loginpage')
             
     context={
         'form':form
@@ -44,6 +46,7 @@ def logoutuser(request):
     return redirect('loginpage')
 
 
+@login_required(login_url='loginpage')
 def home(request):
     if request.user.is_authenticated:
         user = request.user
@@ -57,6 +60,7 @@ def home(request):
         return render(request,'todo/list.html',context)
 
 
+@login_required(login_url='loginpage')
 def create(request):
     form = TODOForm()
     if request.method == 'POST':
@@ -74,6 +78,7 @@ def create(request):
     return render(request,'todo/create.html',context)
 
 
+@login_required(login_url='loginpage')
 def detailpage(request,pk):
     title = TODO.objects.get(id=pk)
     context = {
@@ -82,6 +87,7 @@ def detailpage(request,pk):
     return render(request,'todo/details.html',context)
 
 
+@login_required(login_url='loginpage')
 def updatepage(request,pk):
     title = TODO.objects.get(id=pk)
     form = TODOForm(instance = title)
@@ -96,6 +102,7 @@ def updatepage(request,pk):
     return render(request,'todo/update.html',context)
 
 
+@login_required(login_url='loginpage')
 def deletepage(request,pk):
     title = TODO.objects.get(id=pk)
     form = TODOForm()
@@ -106,3 +113,11 @@ def deletepage(request,pk):
         'title':title
     }
     return render(request,'todo/delete.html',context)
+
+@login_required(login_url='loginpage')
+def change_todo( request ,pk,status):
+    todo = TODO.objects.get(pk=pk)
+    todo.status = status
+    todo.save()
+    return redirect('home')
+    

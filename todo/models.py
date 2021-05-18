@@ -22,6 +22,8 @@ class TODO(models.Model):
     title = models.CharField(max_length=50)
     task = models.TextField(blank=False)
     status = models.CharField(max_length=20 , choices=status_choices)
+    
+    """ related name helps to connect priority with the user"""
     user  = models.ForeignKey(User  , on_delete= models.CASCADE, related_name='priority')
     date = models.DateTimeField(auto_now_add=True)
     priority = models.IntegerField(max_length=2 , choices=priority_choices)
