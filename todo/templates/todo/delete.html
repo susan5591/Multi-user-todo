@@ -2,7 +2,7 @@
 {% load static %}
 {% block body %}    
     <div class="jumbotron">
-        <p class="lead"><b>Are you sure you want to delete "{{title}}"?</b></p>
+        <p class="lead"><b>Are you sure you want to delete "{{title}}" task?</b></p>
 		<form method="POST" action="">
 			{% csrf_token %}
 			<a class="btn btn-primary btn-lg" href="{% url 'home' %}" >Cancel</a>
