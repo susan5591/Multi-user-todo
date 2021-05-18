@@ -72,15 +72,25 @@
 		.action{
 			text-align: center !important;
 		}
+		button{
+			align-items: right;
+		}
 
 	</style>
 
-	<div class="center-column">
+	<div class="center-column">		
 		{% if tasks|length == 0 %}
 			<div class="empty">
 				<b>No Todos</b>
 			</div>
 		{%else%}
+			<div>		
+				<form class="search" method="GET">
+					{% csrf_token %}
+					{{myFilter.form.Title}} 
+					<input class="btn btn-lg btn-success" type="submit" value="Search">
+				</form>	
+			</div>	
 			<div class="item-nav">  
 				<div class="container">
 					<div class="row">
